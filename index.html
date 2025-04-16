@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gülümseten Sayfa</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c') center/cover no-repeat;
+      background-attachment: fixed;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      margin: 30px auto;
+      padding: 25px;
+      border-radius: 20px;
+      max-width: 850px;
+      width: 90%;
+    }
+
+    button {
+      padding: 14px;
+      margin: 10px 0;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #ff9800;
+      color: white;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button:hover {
+      background: #e68a00;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .close-btn {
+      background: #ff9800;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .puzzle-piece {
+      width: 60px;
+      height: 60px;
+      background-color: #ff9800;
+      color: white;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .matched {
+      background-color: #4caf50 !important;
+    }
+
+    iframe {
+      width: 100%;
+      height: 250px;
+      border: none;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gülümseten Sayfa</h1>
+    <div id="quote">"İnsan, hayal ettiği müddetçe yaşar." - Yahya Kemal</div>
+    <button onclick="showVerse()">Günün Ayeti</button>
+    <button onclick="showVideo()">Eğlenceli Video</button>
+    <button onclick="showGame()">Eşleştirme Oyunu</button>
+    <button onclick="showJoke()">Günün Fıkrası</button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">Kapat</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Gülümseten Sayfa | Hazırlayanlar: Ebrar, Nur, İlayda, İnci, Elvan, Elif
+  </footer>
+
+  <script>
+    const quotes = [
+      '"İnsan, hayal ettiği müddetçe yaşar." - Yahya Kemal',
+      '"Düşlemek, ruhun en derin dileğidir." - Oğuz Atay',
+      '"Her gün yeni baştan yaşamak mümkün olacak mı dersin?" - Oğuz Atay'
+    ];
+
+    const verses = [
+      "Allah size güç yetiremeyeceğiniz yükü yüklemez. (Bakara 2:286)",
+      "Rabbin seni terk etmedi sana darılmadı da. (Duha/3)",
+      "Senin Rabbin hiçbir şeyi unutmaz. (Meryem/64)"
+    ];
+
+    const videos = [
+      "https://www.youtube.com/embed/CNTFyOX5k1Q",
+      "https://www.youtube.com/embed/mk67fFcmZGY"
+    ];
+
+    const jokes = [
+      "Temel dua eder: 'Allah’ım, bana piyango kazandır.' Gökyüzünden ses gelir: 'Temel, önce bir bilet al!'",
+      "Çocuk babasına sorar: 'Büyüyünce ne olacağım?' Baba cevaplar: 'Önce şu matematiği geç evladım!'"
+    ];
+
+    const emojis = ['🍎', '🍌', '🍇', '🍓'];
+    let verseIndex = 0;
+    let videoIndex = 0;
+    let jokeIndex = 0;
+    let flipped = [];
+
+    function showModal(content) {
+      document.getElementById("modal").style.display = "flex";
+      document.getElementById("modal-body").innerHTML = content;
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+      document.getElementById("modal-body").innerHTML = "";
+      flipped = [];
+    }
+
+    function showVerse() {
+      const content = `<p>${verses[verseIndex]}</p>`;
+      verseIndex = (verseIndex + 1) % verses.length;
+      showModal(content);
+    }
+
+    function showVideo() {
+      const content = `<iframe src="${videos[videoIndex]}" allowfullscreen></iframe>`;
+      videoIndex = (videoIndex + 1) % videos.length;
+      showModal(content);
+    }
+
+    function showJoke() {
+      const content = `<p>${jokes[jokeIndex]}</p>`;
+      jokeIndex = (jokeIndex + 1) % jokes.length;
+      showModal(content);
+    }
+
+    function showGame() {
+      const pieces = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+      let html = '<div class="puzzle-grid">';
+      pieces.forEach((item) => {
+        html += `<div class="puzzle-piece" onclick="flipPiece(this, '${item}')">?</div>`;
+      });
+      html += '</div>';
+      showModal(html);
+    }
+
+    function flipPiece(elem, value) {
+      if (elem.innerText !== '?') return;
+      elem.innerText = value;
+      flipped.push({ elem, value });
+
+      if (flipped.length === 2) {
+        const [a, b] = flipped;
+        if (a.value === b.value) {
+          a.elem.classList.add('matched');
+          b.elem.classList.add('matched');
+        } else {
+          setTimeout(() => {
+            a.elem.innerText = '?';
+            b.elem.innerText = '?';
+          }, 800);
+        }
+        flipped = [];
+      }
+    }
+
+    window.onload = () => {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById("quote").innerText = randomQuote;
+    };
+  </script>
+</body>
+</html>
