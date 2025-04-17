@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -40,7 +41,6 @@
       background: #e68a00;
     }
 
-    /* Modal CSS */
     .modal {
       display: none;
       position: fixed;
@@ -52,8 +52,6 @@
       justify-content: center;
       align-items: center;
       z-index: 999;
-      box-sizing: border-box;
-      padding: 10px;
     }
 
     .modal-content {
@@ -62,35 +60,31 @@
       padding: 20px;
       border-radius: 10px;
       max-width: 600px;
-      width: 100%;
+      width: 90%;
       max-height: 90vh;
       overflow-y: auto;
-      box-sizing: border-box;
     }
 
-    iframe {
-      width: 100%;
-      height: 200px;
+    .close-btn {
+      background: #ff9800;
+      color: white;
       border: none;
-    }
-
-    #quote {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      font-style: italic;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 15px;
     }
 
     .puzzle-grid {
       display: grid;
-      grid-template-columns: repeat(2, 80px);
+      grid-template-columns: repeat(4, 60px);
       gap: 10px;
       justify-content: center;
-      margin-top: 15px;
     }
 
     .puzzle-piece {
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
       background-color: #ff9800;
       color: white;
       font-size: 1.4rem;
@@ -99,38 +93,22 @@
       justify-content: center;
       border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
 
     .matched {
       background-color: #4caf50 !important;
     }
 
-    footer {
-      position: fixed;
-      bottom: 0;
+    iframe {
       width: 100%;
+      height: 250px;
+      border: none;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 15px;
       background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px 0;
-      font-size: 0.95rem;
-      text-align: center;
-    }
-
-    footer span {
-      color: white;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .modal-content {
-        width: 90%;
-        max-height: 80vh;
-      }
-
-      button {
-        font-size: 0.9rem;
-      }
     }
   </style>
 </head>
@@ -139,31 +117,25 @@
     <h1>Gülümseten Sayfa</h1>
     <div id="quote">"İnsan, hayal ettiği müddetçe yaşar." - Yahya Kemal</div>
     <button onclick="showVerse()">Günün Ayeti</button>
-    <button onclick="showVideo()">Eğlenceli Videolar</button>
+    <button onclick="showVideo()">Eğlenceli Video</button>
     <button onclick="showGame()">Eşleştirme Oyunu</button>
-    <button onclick="showJoke()">Günün Fıkrası</button> <!-- Günün Fıkrası Butonu -->
+    <button onclick="showJoke()">Günün Fıkrası</button>
   </div>
 
+  <!-- Modal -->
   <div class="modal" id="modal">
-    <div class="modal-content" id="modal-content">
-      <button onclick="closeModal()">Kapat</button>
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">Kapat</button>
       <div id="modal-body"></div>
     </div>
   </div>
 
   <footer>
-    &copy; 2025 Gülümseten Sayfa
-    <br>
-    <span class="ebrar">Ebrar</span> @
-    <span class="nur">Nur</span> @
-    <span class="ilayda">İlayda</span> @
-    <span class="ayse">İnci</span> @
-    <span class="fatma">Elvan</span> @
-    <span class="hatice">Elif</span>
+    &copy; 2025 Gülümseten Sayfa | Hazırlayanlar: Ebrar, Nur, İlayda, İnci, Elvan, Elif
   </footer>
 
   <script>
-    const quotes = [
+  const quotes = [
       '"İnsan, hayal ettiği müddetçe yaşar." - Yahya Kemal',
       '"Hayat, her bir nefeste anlam bulur." - Anonim',
       '"En karanlık an, en aydınlık sabaha yakın olandır." - Anonim',
@@ -182,19 +154,8 @@
       '"Ölümden sakınmak o kadar zor değildir, zor olan kötülükten sakınmaktır, çünkü kötülük ölümden daha hızlı koşar." - Sokrates'
       
     ];
-
-    function changeQuote() {
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      document.getElementById('quote').innerText = quotes[randomIndex];
-    }
-
-    // Sayfa her yüklendiğinde farklı bir söz göster
-    window.onload = function() {
-      changeQuote();
-    };
-
     const verses = [
-      "şüphesiz namaz,Allah'a derin saygı duyanlardan başkasına ağır gelir. (Bakara/45)",
+    "şüphesiz namaz,Allah'a derin saygı duyanlardan başkasına ağır gelir. (Bakara/45)",
       "Şüphesiz her zorlukla beraber bir kolaylık vardır.O halde, işini bitirince hemen diğerine koyulup yorul.Ve yalnız rabbine yönelip doğrul. (İnşirah 94:6)",
       "Unutma ki, her karanlık gecenin bir sabahı vardır. (Şems 91:1-3)",
       "Allah size güç yetiremeyeceğiniz yükü yüklemez. (Bakara 2:286)",
@@ -209,96 +170,89 @@
       "Göğsünün daraldığını biliyoruz. (Hicri/97)",
       "Sana Allah yeter! (Enfal/ 62)",
       "Yüzünü göğe çevirip,haber beklediğini elbette görüyoruz.(Bakara/144)",
-      "Rabbinin hükmüne sabret.Çünkü sen gözlerimizin önündesin.(Tur/48)" 
+      "Rabbinin hükmüne sabret.Çünkü sen gözlerimizin önündesin.(Tur/48)"
     ];
-    let verseIndex = 0;
-
-    function showVerse() {
-      document.getElementById('modal').style.display = 'flex';
-      document.getElementById('modal-body').innerHTML = `<p>${verses[verseIndex]}</p>`;
-      verseIndex = (verseIndex + 1) % verses.length;
-    }
 
     const videos = [
-      "https://youtube.com/shorts/ODkPzt1Zzdk?si=DaDMQF18Y_n9CLrU",
-      " https://vt.tiktok.com/ZSr48WUQT/",
-      "https://vt.tiktok.com/ZSr48gFxf/",
-      "https://youtube.com/shorts/L-A0l369r88?si=Hvi4f-fEFyJwF2pB",
-      "https://vt.tiktok.com/ZSr4L21r8/",
-      "https://youtube.com/shorts/mk67fFcmZGY?si=llPhuPMB2GB0wWCn",
-      "https://vt.tiktok.com/ZSr4LmYB2/",
-      "https://vt.tiktok.com/ZSr4Lxt3L/",
-      "https://vt.tiktok.com/ZSr4LKK6U/",
-      "https://www.instagram.com/reel/DH-Z6vogep4/?igsh=aW5zMTg1ajJkN3My",
-      "https://www.instagram.com/reel/DHEOANtCg0S/?igsh=MTRvcHQ0eG5scDd5cQ==",
-      "https://www.instagram.com/reel/DHGpjCBAcGq/?igsh=aTc2Nm1jaG45c2Zz",
-      "https://youtube.com/shorts/CNTFyOX5k1Q?si=fU9ugc6WpssnIViD",
-      "https://www.instagram.com/reel/DHEOANtCg0S/?igsh=MTRvcHQ0eG5scDd5cQ==",
-      "https://youtube.com/shorts/CNTFyOX5k1Q?si"
-    ];    
+      "https://www.youtube.com/embed/CNTFyOX5k1Q",
+      "https://www.youtube.com/embed/mk67fFcmZGY"
+    ];
+
+    const jokes = [
+    "Hayaller ve Gerçekler. Çocuk babasına sorar:— “Baba, büyüyünce ne olacağım?”Baba cevap verir: — “Ne olmak istiyorsan evladım. Ama önce şu matematiği geç, yoksa ‘keşke’ olursun.",
+      "Temel dua eder: 'Allah’ım, bana piyango kazandır.' Gökyüzünden ses gelir: 'Temel, önce bir bilet al!'",
+      "Çocuk babasına sorar: 'Büyüyünce ne olacağım?' Baba cevaplar: 'Önce şu matematiği geç evladım!'"
+    ];
+
+    const emojis = ['🍎', '🍌', '🍇', '🍓'];
+    let verseIndex = 0;
     let videoIndex = 0;
+    let jokeIndex = 0;
+    let flipped = [];
+
+    function showModal(content) {
+      document.getElementById("modal").style.display = "flex";
+      document.getElementById("modal-body").innerHTML = content;
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+      document.getElementById("modal-body").innerHTML = "";
+      flipped = [];
+    }
+
+    function showVerse() {
+      const content = `<p>${verses[verseIndex]}</p>`;
+      verseIndex = (verseIndex + 1) % verses.length;
+      showModal(content);
+    }
 
     function showVideo() {
-      document.getElementById('modal').style.display = 'flex';
-      document.getElementById('modal-body').innerHTML = `<iframe src="${videos[videoIndex]}" allowfullscreen></iframe>`;
+      const content = `<iframe src="${videos[videoIndex]}" allowfullscreen></iframe>`;
       videoIndex = (videoIndex + 1) % videos.length;
+      showModal(content);
+    }
+
+    function showJoke() {
+      const content = `<p>${jokes[jokeIndex]}</p>`;
+      jokeIndex = (jokeIndex + 1) % jokes.length;
+      showModal(content);
     }
 
     function showGame() {
-      const emojis = ['🍎', '🍌', '🍇', '🍓'];
       const pieces = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
       let html = '<div class="puzzle-grid">';
-      pieces.forEach((item, index) => {
+      pieces.forEach((item) => {
         html += `<div class="puzzle-piece" onclick="flipPiece(this, '${item}')">?</div>`;
       });
       html += '</div>';
-      document.getElementById('modal').style.display = 'flex';
-      document.getElementById('modal-body').innerHTML = html;
+      showModal(html);
     }
 
-    let flipped = [];
     function flipPiece(elem, value) {
       if (elem.innerText !== '?') return;
       elem.innerText = value;
       flipped.push({ elem, value });
 
       if (flipped.length === 2) {
-        const [first, second] = flipped;
-        if (first.value === second.value) {
-          first.elem.classList.add('matched');
-          second.elem.classList.add('matched');
+        const [a, b] = flipped;
+        if (a.value === b.value) {
+          a.elem.classList.add('matched');
+          b.elem.classList.add('matched');
         } else {
           setTimeout(() => {
-            first.elem.innerText = '?';
-            second.elem.innerText = '?';
+            a.elem.innerText = '?';
+            b.elem.innerText = '?';
           }, 800);
         }
         flipped = [];
       }
     }
 
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-      document.getElementById('modal-body').innerHTML = '';
-      flipped = [];
-    }
-
-    // Günün Fıkrası Fonksiyonu
-    const jokes = [
-      "Hayaller ve Gerçekler. Çocuk babasına sorar:— “Baba, büyüyünce ne olacağım?”Baba cevap verir: — “Ne olmak istiyorsan evladım. Ama önce şu matematiği geç, yoksa ‘keşke’ olursun.",
-      "Bir köyde, bir deli ile akıllı adam bir kafede karşılaşmış. Akıllı adam deliye sorar:Akıllı Adam: “Bir insanın akıllı olup olmadığını nasıl anlarsınız? Deli: “Bunun çok basit bir yolu var! Akıllı       adamın cebinde hep bir hesap defteri, bir kalem vardır. O her şeyi kaydeder, her hareketini hesaplar. Deli ise hiçbir şey kaydetmez, her anını yaşar.”Akıllı Adam (gülerek): “Peki ya sen, deli olarak bunu nereden biliyorsun?” Deli (gülerek cevap verir): “Çünkü ben de bazen akıllı gibi görünüyorum!”Akıllı Adam: “Ama sen deli olduğunun farkındasın.”Deli: “İşte asıl soru bu! Eğer ben deli olduğumun farkındaysam, deli miyim, yoksa akıllı mı?”Akıllı Adam: “Bunu bana soruyorsun çünkü sen deli değilsin, sadece hayatı bir şekilde yaşıyorsun!”Deli: “Evet, doğru. Ama kimse bana sorar mı? Bunu sadece bir deli olarak söylüyorum!
-Bu fıkra, hayatın karmaşasında bazen doğruyu bulmanın, düşündüğün kadar kolay olmadığını ve bazen zihnimizin sınırlarının da ne kadar belirsiz olduğunu gösteriyor. Komik ama aynı zamanda insanın hayatı nasıl çok basit ama bir o kadar karmaşık yaşadığını düşündürüyor.",
-      "Temel dua eder:– Allah’ım, bana piyango kazandır.Her hafta dua eder, yine kazanamaz. Sonunda gökten bir ses gelir:– Temel, bari bir bilet al!
-> İstiyorsan adım at. Dua da güzel ama hareketsiz dilek olmaz. Al bileti, gir sınava, yap projeni. Gerisi Allah kerim.
-Umarım daha çok güldürebilmiştir!"
-    ];
-    let jokeIndex = 0;
-
-    function showJoke() {
-      document.getElementById('modal').style.display = 'flex';
-      document.getElementById('modal-body').innerHTML = `<p>${jokes[jokeIndex]}</p>`;
-      jokeIndex = (jokeIndex + 1) % jokes.length;
-    }
+    window.onload = () => {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById("quote").innerText = randomQuote;
+    };
   </script>
 </body>
 </html>
