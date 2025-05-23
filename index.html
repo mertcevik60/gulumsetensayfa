@@ -1,271 +1,270 @@
-
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gülümseten Sayfa</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c') center/cover no-repeat;
-      background-attachment: fixed;
-      color: white;
-      text-align: center;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gülümseten Sayfa</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: url("https://images.unsplash.com/photo-1519389950473-47ba0277781c")
+          center/cover no-repeat;
+        background-attachment: fixed;
+        color: white;
+        text-align: center;
+      }
 
-    .container {
-      background: rgba(0, 0, 0, 0.7);
-      margin: 30px auto;
-      padding: 25px;
-      border-radius: 20px;
-      max-width: 850px;
-      width: 90%;
-    }
+      .container {
+        background: rgba(0, 0, 0, 0.7);
+        margin: 30px auto;
+        padding: 25px;
+        border-radius: 20px;
+        max-width: 850px;
+        width: 90%;
+      }
 
-    button {
-      padding: 14px;
-      margin: 10px 0;
-      font-size: 1rem;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      background: #ff9800;
-      color: white;
-      width: 100%;
-      box-sizing: border-box;
-    }
+      button {
+        padding: 14px;
+        margin: 10px 0;
+        font-size: 1rem;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        background: #ff9800;
+        color: white;
+        width: 100%;
+        box-sizing: border-box;
+      }
 
-    button:hover {
-      background: #e68a00;
-    }
+      button:hover {
+        background: #e68a00;
+      }
 
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.85);
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
 
-    .modal-content {
-      background: white;
-      color: black;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 600px;
-      width: 90%;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
+      .modal-content {
+        background: white;
+        color: black;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
 
-    .close-btn {
-      background: #ff9800;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 15px;
-    }
+      .close-btn {
+        background: #ff9800;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-bottom: 15px;
+      }
 
-    .puzzle-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 60px);
-      gap: 10px;
-      justify-content: center;
-    }
+      .puzzle-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 60px);
+        gap: 10px;
+        justify-content: center;
+      }
 
-    .puzzle-piece {
-      width: 60px;
-      height: 60px;
-      background-color: #ff9800;
-      color: white;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+      .puzzle-piece {
+        width: 60px;
+        height: 60px;
+        background-color: #ff9800;
+        color: white;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        cursor: pointer;
+      }
 
-    .matched {
-      background-color: #4caf50 !important;
-    }
+      .matched {
+        background-color: #4caf50 !important;
+      }
 
-    iframe {
-      width: 100%;
-      height: 250px;
-      border: none;
-    }
+      iframe {
+        width: 100%;
+        height: 250px;
+        border: none;
+      }
 
-    footer {
-      margin-top: 30px;
-      padding: 15px;
-      background: rgba(0, 0, 0, 0.7);
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Gülümseten Sayfa</h1>
-    <div id="quote">"İnsan, hayal ettiği müddetçe yaşar." - Yahya Kemal</div>
-    <button onclick="showVerse()">Günün Ayeti</button>
-    <button onclick="showVideo()">Eğlenceli Video</button>
-    <button onclick="showGame()">Eşleştirme Oyunu</button>
-    <button onclick="showJoke()">Günün Fıkrası</button>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">Kapat</button>
-      <div id="modal-body"></div>
+      footer {
+        margin-top: 30px;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Gülümseten Sayfa</h1>
+      <div id="quote">"İnsan, hayal ettiği müddetçe yaşar." - Yahya Kemal</div>
+      <button onclick="showVerse()">Günün Ayeti</button>
+      <button onclick="showVideo()">Eğlenceli Video</button>
+      <button onclick="showGame()">Eşleştirme Oyunu</button>
+      <button onclick="showJoke()">Günün Fıkrası</button>
     </div>
-  </div>
 
-  <footer>
-    &copy; 2025 Gülümseten Sayfa | Hazırlayanlar: Ebrar, Nur, İlayda, İnci, Elvan, Elif
-  </footer>
+    <!-- Modal -->
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">Kapat</button>
+        <div id="modal-body"></div>
+      </div>
+    </div>
 
-  <script>
-  const quotes = [
-      '"İnsan, hayal ettiği müddetçe yaşar." - Yahya Kemal',
-      '"Hayat, her bir nefeste anlam bulur." - Anonim',
-      '"En karanlık an, en aydınlık sabaha yakın olandır." - Anonim',
-      '"Düşlemek, ruhun en derin dileğidir." - Oğuz Atay',
-      '"Hiçbir zaman beklenmedik bir olayla karşılaşmaz insan. Olaylara rastlamamak için sen yolunu değiştirdin. Karşı kaldırıma geçtin."- Tutunamayanlar',
-      '"Kimse seni olduğun gibi kabul etmiyor olabilir. Ama en büyük teslimiyet, başkalarının onayını değil, kendi içindeki gücü kabul etmektir. Gerçek özgürlük, kendini olduğu gibi sevmekte, olduğun yerden hareket etmektedir. Dünya, seni kim olduğunla kabul ettiğinde değil, senin kim olduğunu fark ettiğinde değişir." - Anonim',
-      '"Bazı acılar vardır, anlatamazsın.Bazı yalnızlıklar vardır, kalabalıkta bile geçmez.Ama yürürsün…Çünkü bilirsin, seni durduran şey insanlar değil, senin vazgeçişindir.Ve sen bir gün, vazgeçmeyen tarafınla gurur duyacaksın." - Anonim',
-      '"Hayat sana her zaman kolayını sunmaz. Bazen kendi yolunu kazman gerekir, ellerin kanayarak.Ama sonra dönüp baktığında anlarsın:Kimse sana yapamazsın dediğinde durmasaydın, bu kadar güçlü olamazdın." - Elif Şafak',
-      '"Ve insan, en çok da kendine yorgundu aslında…Olmak istediklerine, olamadıklarına,Sustuklarına, söylediklerine,Kaçtıklarına, kaldıklarına…İçinde bir savaş, dışında bir gülümseme… İşte tam da bu,insanın en sessiz çığlığıydı." - Anonim',
-      '"Kelimeleri daha önce öyle kötü yerlerde kullanmış oluyoruz ki, kirletir diye korkuyoruz duygularımıza dokunursa." - Oğuz Atay',
-      '"Her gün yeni baştan yaşamak mümkün olacak mı dersin? Bir gün öncesine korkak bir bezirganlıkla sarılmadan yaşayabilecek miyiz? Yoksa, yarından korktuğumuz için, düne köle gibi bağlanacak mıyız? Yaşarsak göreceğiz Olric. Yaşamaktan korkmazsak göreceğiz." - Oğuz Atay',
-      '"Kendini çözemeyen kişi kendi dışında hiçbir sorunu çözemez." - Oğuz Atay',
-      '"Bir dostun varlığı güzel bir şeydir fakat bir dosta ihtiyaç duymadan yaşayabilmektir önemli olan." - Oğuz Atay',
-      '"Hiçbir iz bırakmadan kaybolacağını sananlar aldandılar." - Oğuz Atay',
-      '"İnsan, kendini beğenmeden yaşayamaz. Kendini beğenirse diğer insanlar onun hayatını cehenneme çevirmeye çalışırlar bunun için insan ,hem kendini beğenmeli hem de beğenmemelidir." -Oğuz Atay',
-      '"Ölümden sakınmak o kadar zor değildir, zor olan kötülükten sakınmaktır, çünkü kötülük ölümden daha hızlı koşar." - Sokrates'
-      
-    ];
-    const verses = [
-      "şüphesiz namaz,Allah'a derin saygı duyanlardan başkasına ağır gelir. (Bakara/45)",
-      "Şüphesiz her zorlukla beraber bir kolaylık vardır.O halde, işini bitirince hemen diğerine koyulup yorul.Ve yalnız rabbine yönelip doğrul. (İnşirah 94:6)",
-      "Unutma ki, her karanlık gecenin bir sabahı vardır. (Şems 91:1-3)",
-      "Allah size güç yetiremeyeceğiniz yükü yüklemez. (Bakara 2:286)",
-      "İnsan,şerri de hayrı istediği gibi ister.İnsan pek acelecidir! (İsra/11)",
-      "Rabbin seni terk etmedi sana darılmadı da. (Duha/3)",
-      "Onlar,rablerine iman etmiş gençlerdir.Ve biz onların hidayetlerini arttırdık. ( Kehf/13)",
-      " Aydınlık sabahı düşün ve durgun karanlık geceyi.Rabbin seni ne unuttu ne de darıldı.Ve zamanı geldiğinde Rabbin sana (kalbinden geçeni bağışlayacak ve seni hoşnut kılacak.) (Duha 1/2/3/5)",
-      "Senin Rabbin hiç bir şeyi unutacak değildir. (Meryem/64)",
-      "Kuşlara dahi yol çizen Allah,insanı yolsuz mu bırakacaktır? Seni yaratan elbet yolunu da gösterir. (Şuara/78)",
-      "Allah bilir siz bilemezsiniz. (Bakara/216)",
-      "Vakti geldiğinde Rabbin sana gönlündekini verecek ve seni hoşnut kılacak. (Duha/5)",
-      "Göğsünün daraldığını biliyoruz. (Hicri/97)",
-      "Sana Allah yeter! (Enfal/ 62)",
-      "Yüzünü göğe çevirip,haber beklediğini elbette görüyoruz.(Bakara/144)",
-      "Rabbinin hükmüne sabret.Çünkü sen gözlerimizin önündesin.(Tur/48)"
-    ];
+    <footer>
+      &copy; 2025 Gülümseten Sayfa | Hazırlayanlar: Ebrar, Nur, İlayda, İnci,
+      Elvan, Elif
+    </footer>
 
-    const videos = [
-      "https://youtube.com/embed/m3dqRwLkszU?si=enF7qgcIGEVYdlmf",
-      "https://youtube.com/embed/jngBEcAQ6E8?si=Z_fEatK5mx7YoT75 ",
-      "https://youtube.com/embed/VHdNVibTaCg?si=GB1d1zEKjB5juaFR ",
-      "https://youtube.com/embed/3gpX8mhE4jk?si=8CUSaSeTbuzL37Fs ",
-      "https://youtube.com/embed/GfHXVU9FSvs?si=Ygw2vrFX5_dXznTo",
-      "https://youtube.com/embed/bOyuxmF-oX0?si=TRccjuT0DcE0M96r",
-	  "https://youtube.com/embed/CNTFyOX5k1Q?si=fU9ugc6WpssnIViD",
-      "https://www.youtube.com/embed/CNTFyOX5k1Q",
-      "https://www.youtube.com/embed/mk67fFcmZGY"
-    ];
+    <script>
+      const quotes = [
+        '"İnsan, hayal ettiği müddetçe yaşar." - Yahya Kemal',
+        '"Hayat, her bir nefeste anlam bulur." - Anonim',
+        '"En karanlık an, en aydınlık sabaha yakın olandır." - Anonim',
+        '"Düşlemek, ruhun en derin dileğidir." - Oğuz Atay',
+        '"Hiçbir zaman beklenmedik bir olayla karşılaşmaz insan. Olaylara rastlamamak için sen yolunu değiştirdin. Karşı kaldırıma geçtin."- Tutunamayanlar',
+        '"Kimse seni olduğun gibi kabul etmiyor olabilir. Ama en büyük teslimiyet, başkalarının onayını değil, kendi içindeki gücü kabul etmektir. Gerçek özgürlük, kendini olduğu gibi sevmekte, olduğun yerden hareket etmektedir. Dünya, seni kim olduğunla kabul ettiğinde değil, senin kim olduğunu fark ettiğinde değişir." - Anonim',
+        '"Bazı acılar vardır, anlatamazsın.Bazı yalnızlıklar vardır, kalabalıkta bile geçmez.Ama yürürsün…Çünkü bilirsin, seni durduran şey insanlar değil, senin vazgeçişindir.Ve sen bir gün, vazgeçmeyen tarafınla gurur duyacaksın." - Anonim',
+        '"Hayat sana her zaman kolayını sunmaz. Bazen kendi yolunu kazman gerekir, ellerin kanayarak.Ama sonra dönüp baktığında anlarsın:Kimse sana yapamazsın dediğinde durmasaydın, bu kadar güçlü olamazdın." - Elif Şafak',
+        '"Ve insan, en çok da kendine yorgundu aslında…Olmak istediklerine, olamadıklarına,Sustuklarına, söylediklerine,Kaçtıklarına, kaldıklarına…İçinde bir savaş, dışında bir gülümseme… İşte tam da bu,insanın en sessiz çığlığıydı." - Anonim',
+        '"Kelimeleri daha önce öyle kötü yerlerde kullanmış oluyoruz ki, kirletir diye korkuyoruz duygularımıza dokunursa." - Oğuz Atay',
+        '"Her gün yeni baştan yaşamak mümkün olacak mı dersin? Bir gün öncesine korkak bir bezirganlıkla sarılmadan yaşayabilecek miyiz? Yoksa, yarından korktuğumuz için, düne köle gibi bağlanacak mıyız? Yaşarsak göreceğiz Olric. Yaşamaktan korkmazsak göreceğiz." - Oğuz Atay',
+        '"Kendini çözemeyen kişi kendi dışında hiçbir sorunu çözemez." - Oğuz Atay',
+        '"Bir dostun varlığı güzel bir şeydir fakat bir dosta ihtiyaç duymadan yaşayabilmektir önemli olan." - Oğuz Atay',
+        '"Hiçbir iz bırakmadan kaybolacağını sananlar aldandılar." - Oğuz Atay',
+        '"İnsan, kendini beğenmeden yaşayamaz. Kendini beğenirse diğer insanlar onun hayatını cehenneme çevirmeye çalışırlar bunun için insan ,hem kendini beğenmeli hem de beğenmemelidir." -Oğuz Atay',
+        '"Ölümden sakınmak o kadar zor değildir, zor olan kötülükten sakınmaktır, çünkü kötülük ölümden daha hızlı koşar." - Sokrates',
+      ];
+      const verses = [
+        "şüphesiz namaz,Allah'a derin saygı duyanlardan başkasına ağır gelir. (Bakara/45)",
+        "Şüphesiz her zorlukla beraber bir kolaylık vardır.O halde, işini bitirince hemen diğerine koyulup yorul.Ve yalnız rabbine yönelip doğrul. (İnşirah 94:6)",
+        "Unutma ki, her karanlık gecenin bir sabahı vardır. (Şems 91:1-3)",
+        "Allah size güç yetiremeyeceğiniz yükü yüklemez. (Bakara 2:286)",
+        "İnsan,şerri de hayrı istediği gibi ister.İnsan pek acelecidir! (İsra/11)",
+        "Rabbin seni terk etmedi sana darılmadı da. (Duha/3)",
+        "Onlar,rablerine iman etmiş gençlerdir.Ve biz onların hidayetlerini arttırdık. ( Kehf/13)",
+        " Aydınlık sabahı düşün ve durgun karanlık geceyi.Rabbin seni ne unuttu ne de darıldı.Ve zamanı geldiğinde Rabbin sana (kalbinden geçeni bağışlayacak ve seni hoşnut kılacak.) (Duha 1/2/3/5)",
+        "Senin Rabbin hiç bir şeyi unutacak değildir. (Meryem/64)",
+        "Kuşlara dahi yol çizen Allah,insanı yolsuz mu bırakacaktır? Seni yaratan elbet yolunu da gösterir. (Şuara/78)",
+        "Allah bilir siz bilemezsiniz. (Bakara/216)",
+        "Vakti geldiğinde Rabbin sana gönlündekini verecek ve seni hoşnut kılacak. (Duha/5)",
+        "Göğsünün daraldığını biliyoruz. (Hicri/97)",
+        "Sana Allah yeter! (Enfal/ 62)",
+        "Yüzünü göğe çevirip,haber beklediğini elbette görüyoruz.(Bakara/144)",
+        "Rabbinin hükmüne sabret.Çünkü sen gözlerimizin önündesin.(Tur/48)",
+      ];
 
-    const jokes = [
-	   
-      "Hayat Planı: Bir adam sabah uyanır, 'Bugün hiçbir şey yapmayacağım' der.Gün boyu yatakta pinekler, hiçbir şey yapmaz.Gece yatağa girerken içinden geçirir:'Yarın daha çok hiçbir şey yapacağım!'Düşündürür: Bazen hareketsizlik de bir alışkanlığa dönüşür.Güldürür: Planlı tembellik kadar profesyonel bir şey yoktur!",
-      "O gün çok yağmur yağıyormuş Nasrettin Hoca da pencere kenarında oturmuş dışarıya seyrediyormuş o sırada bir komşusunu yağmurun altında koşarken görmüş camı açmış ve insan hiç Allah'ın rahmetinden kaçar mı komşu demiş komşusu utanmış ve yürümeye başlamış başka bir gün yine yağmur yağıyormuş ama hoca bu sefer dışarıdaymış yağmuru yakalanınca komşuya başlamış Bu sefer de komşusu evdeymiş ve onu görünce Hoca utanmıyor musun rahmetten kaçıyorsun demiş Nasrettin Hoca Ben rahmetten kaçmıyorum düşen rahmetin üstüne basmamak için Koşuyorum demiş",
-      "Günlerden bir gün Nasrettin Hoca'nın canı tarhana çorbası çekmiş üzerine ekmek doğrayıp çorba içmeye hayli kuru hayali kurarken kapısı çalınmış yan komşunun oğluymuş gelen hocam annem çok hasta yemek yapamadık Bir Tas Çorbam varsa verebilir misin demiş Bunu duyan hoca kendi kendine bu komşularda Bir alem kurduğum hayalin bile kokusunu almayı beceriyorlar demiş",
-	  "Temel dua eder:– Allah’ım, bana piyango kazandır.– Temel, bari bir bilet al!İstiyorsan adım at. Dua da güzel ama hareketsiz dilek olmaz. Al bileti, gir sınava, yap projeni. Gerisi Allah kerim,yorsan adım at. Dua da güzel ama hareketsiz dilek olmaz. Al bileti, gir sınava, yap projeni. Gerisi Allah kerim ", 
-      "Hayaller ve Gerçekler. Çocuk babasına sorar:— “Baba, büyüyünce ne olacağım?”Baba cevap verir: — “Ne olmak istiyorsan evladım. Ama önce şu matematiği geç, yoksa ‘keşke’ olursun.",
-      "Temel dua eder: 'Allah’ım, bana piyango kazandır.' Gökyüzünden ses gelir: 'Temel, önce bir bilet al!'",
-      "Çocuk babasına sorar: 'Büyüyünce ne olacağım?' Baba cevaplar: 'Önce şu matematiği geç evladım!'",
-	  "İyilik mi? O da yorulmuş...Adamın biri her gün herkese yardım eder, güleryüzlü olurmuş.Bir gün biri sormuş:— 'Neden hep iyisin?'— 'Çünkü kötülük etmek için çok fazla enerji lazım, ben de üşeniyorum.'— 'Peki insanlar değer veriyor mu?'— 'Veriyor... Ama hep kendilerine.'Düşündürür: İyiliği herkes sever, ama yapanı çoğu zaman yalnız bırakır.Güldürür: Üşengeçlik bile bazen karakter geliştiriyor!"
-    ];
+      const videos = [
+        "https://youtube.com/embed/m3dqRwLkszU?si=enF7qgcIGEVYdlmf",
+        "https://youtube.com/embed/jngBEcAQ6E8?si=Z_fEatK5mx7YoT75 ",
+        "https://youtube.com/embed/VHdNVibTaCg?si=GB1d1zEKjB5juaFR ",
+        "https://youtube.com/embed/3gpX8mhE4jk?si=8CUSaSeTbuzL37Fs ",
+        "https://youtube.com/embed/GfHXVU9FSvs?si=Ygw2vrFX5_dXznTo",
+        "https://youtube.com/embed/bOyuxmF-oX0?si=TRccjuT0DcE0M96r",
+        "https://youtube.com/embed/CNTFyOX5k1Q?si=fU9ugc6WpssnIViD",
+        "https://www.youtube.com/embed/CNTFyOX5k1Q",
+        "https://www.youtube.com/embed/mk67fFcmZGY",
+      ];
 
-    const emojis = ['🍎', '🍌', '🍇', '🍓'];
-    let verseIndex = 0;
-    let videoIndex = 0;
-    let jokeIndex = 0;
-    let flipped = [];
+      const jokes = [
+        "Hayat Planı: Bir adam sabah uyanır, 'Bugün hiçbir şey yapmayacağım' der.Gün boyu yatakta pinekler, hiçbir şey yapmaz.Gece yatağa girerken içinden geçirir:'Yarın daha çok hiçbir şey yapacağım!'Düşündürür: Bazen hareketsizlik de bir alışkanlığa dönüşür.Güldürür: Planlı tembellik kadar profesyonel bir şey yoktur!",
+        "O gün çok yağmur yağıyormuş Nasrettin Hoca da pencere kenarında oturmuş dışarıya seyrediyormuş o sırada bir komşusunu yağmurun altında koşarken görmüş camı açmış ve insan hiç Allah'ın rahmetinden kaçar mı komşu demiş komşusu utanmış ve yürümeye başlamış başka bir gün yine yağmur yağıyormuş ama hoca bu sefer dışarıdaymış yağmuru yakalanınca komşuya başlamış Bu sefer de komşusu evdeymiş ve onu görünce Hoca utanmıyor musun rahmetten kaçıyorsun demiş Nasrettin Hoca Ben rahmetten kaçmıyorum düşen rahmetin üstüne basmamak için Koşuyorum demiş",
+        "Günlerden bir gün Nasrettin Hoca'nın canı tarhana çorbası çekmiş üzerine ekmek doğrayıp çorba içmeye hayli kuru hayali kurarken kapısı çalınmış yan komşunun oğluymuş gelen hocam annem çok hasta yemek yapamadık Bir Tas Çorbam varsa verebilir misin demiş Bunu duyan hoca kendi kendine bu komşularda Bir alem kurduğum hayalin bile kokusunu almayı beceriyorlar demiş",
+        "Temel dua eder:– Allah’ım, bana piyango kazandır.– Temel, bari bir bilet al!İstiyorsan adım at. Dua da güzel ama hareketsiz dilek olmaz. Al bileti, gir sınava, yap projeni. Gerisi Allah kerim,yorsan adım at. Dua da güzel ama hareketsiz dilek olmaz. Al bileti, gir sınava, yap projeni. Gerisi Allah kerim ",
+        "Hayaller ve Gerçekler. Çocuk babasına sorar:— “Baba, büyüyünce ne olacağım?”Baba cevap verir: — “Ne olmak istiyorsan evladım. Ama önce şu matematiği geç, yoksa ‘keşke’ olursun.",
+        "Temel dua eder: 'Allah’ım, bana piyango kazandır.' Gökyüzünden ses gelir: 'Temel, önce bir bilet al!'",
+        "Çocuk babasına sorar: 'Büyüyünce ne olacağım?' Baba cevaplar: 'Önce şu matematiği geç evladım!'",
+        "İyilik mi? O da yorulmuş...Adamın biri her gün herkese yardım eder, güleryüzlü olurmuş.Bir gün biri sormuş:— 'Neden hep iyisin?'— 'Çünkü kötülük etmek için çok fazla enerji lazım, ben de üşeniyorum.'— 'Peki insanlar değer veriyor mu?'— 'Veriyor... Ama hep kendilerine.'Düşündürür: İyiliği herkes sever, ama yapanı çoğu zaman yalnız bırakır.Güldürür: Üşengeçlik bile bazen karakter geliştiriyor!",
+      ];
 
-    function showModal(content) {
-      document.getElementById("modal").style.display = "flex";
-      document.getElementById("modal-body").innerHTML = content;
-    }
+      const emojis = ["🍎", "🍌", "🍇", "🍓"];
+      let verseIndex = 0;
+      let videoIndex = 0;
+      let jokeIndex = 0;
+      let flipped = [];
 
-    function closeModal() {
-      document.getElementById("modal").style.display = "none";
-      document.getElementById("modal-body").innerHTML = "";
-      flipped = [];
-    }
+      function showModal(content) {
+        document.getElementById("modal").style.display = "flex";
+        document.getElementById("modal-body").innerHTML = content;
+      }
 
-    function showVerse() {
-      const content = `<p>${verses[verseIndex]}</p>`;
-      verseIndex = (verseIndex + 1) % verses.length;
-      showModal(content);
-    }
-
-    function showVideo() {
-      const content = `<iframe src="${videos[videoIndex]}" allowfullscreen></iframe>`;
-      videoIndex = (videoIndex + 1) % videos.length;
-      showModal(content);
-    }
-
-    function showJoke() {
-      const content = `<p>${jokes[jokeIndex]}</p>`;
-      jokeIndex = (jokeIndex + 1) % jokes.length;
-      showModal(content);
-    }
-
-    function showGame() {
-      const pieces = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
-      let html = '<div class="puzzle-grid">';
-      pieces.forEach((item) => {
-        html += `<div class="puzzle-piece" onclick="flipPiece(this, '${item}')">?</div>`;
-      });
-      html += '</div>';
-      showModal(html);
-    }
-
-    function flipPiece(elem, value) {
-      if (elem.innerText !== '?') return;
-      elem.innerText = value;
-      flipped.push({ elem, value });
-
-      if (flipped.length === 2) {
-        const [a, b] = flipped;
-        if (a.value === b.value) {
-          a.elem.classList.add('matched');
-          b.elem.classList.add('matched');
-        } else {
-          setTimeout(() => {
-            a.elem.innerText = '?';
-            b.elem.innerText = '?';
-          }, 800);
-        }
+      function closeModal() {
+        document.getElementById("modal").style.display = "none";
+        document.getElementById("modal-body").innerHTML = "";
         flipped = [];
       }
-    }
 
-    window.onload = () => {
-      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-      document.getElementById("quote").innerText = randomQuote;
-    };
-  </script>
-</body>
+      function showVerse() {
+        const content = `<p>${verses[verseIndex]}</p>`;
+        verseIndex = (verseIndex + 1) % verses.length;
+        showModal(content);
+      }
+
+      function showVideo() {
+        const content = `<iframe src="${videos[videoIndex]}" allowfullscreen></iframe>`;
+        videoIndex = (videoIndex + 1) % videos.length;
+        showModal(content);
+      }
+
+      function showJoke() {
+        const content = `<p>${jokes[jokeIndex]}</p>`;
+        jokeIndex = (jokeIndex + 1) % jokes.length;
+        showModal(content);
+      }
+
+      function showGame() {
+        const pieces = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+        let html = '<div class="puzzle-grid">';
+        pieces.forEach((item) => {
+          html += `<div class="puzzle-piece" onclick="flipPiece(this, '${item}')">?</div>`;
+        });
+        html += "</div>";
+        showModal(html);
+      }
+
+      function flipPiece(elem, value) {
+        if (elem.innerText !== "?") return;
+        elem.innerText = value;
+        flipped.push({ elem, value });
+
+        if (flipped.length === 2) {
+          const [a, b] = flipped;
+          if (a.value === b.value) {
+            a.elem.classList.add("matched");
+            b.elem.classList.add("matched");
+          } else {
+            setTimeout(() => {
+              a.elem.innerText = "?";
+              b.elem.innerText = "?";
+            }, 800);
+          }
+          flipped = [];
+        }
+      }
+
+      window.onload = () => {
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        document.getElementById("quote").innerText = randomQuote;
+      };
+    </script>
+  </body>
 </html>
